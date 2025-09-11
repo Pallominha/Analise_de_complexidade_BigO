@@ -118,10 +118,10 @@ function getVetor(n) {
   // Função para medir tempo e coletar dados de execução
   function testarOrdenacao(algoritmo, vetor) {
     const inicio = performance.now();
-    algoritmo(vetor);
+    const resultado = algoritmo(vetor);
     const fim = performance.now();
     const tempo = fim - inicio;
-    return tempo;
+    return { tempo, comparacoes: resultado.comparacoes, trocas: resultado.trocas };
   }
   // Função para executar testes e gerar CSV com tempos
   async function gerarCSVTempos() {
@@ -137,17 +137,21 @@ function getVetor(n) {
       { nome: "Decrescente", func: vetorDecrescente },
       { nome: "Aleatório", func: getVetor },
     ];
+  
     // Cabeçalho CSV
-    let csv = "Algoritmo,Tipo Vetor,Tamanho,Tempo(ms)\n";
+    let csv = "Algoritmo,Tipo Vetor,Tamanho,Tempo(ms),Comparações,Trocas\n";
     for (const algoritmo of algoritmos) {
       for (const tipo of tiposVetores) {
         for (const n of tamanhos) {
+
           console.log(`Testando ${algoritmo.nome} com vetor ${tipo.nome} de tamanho ${n}...`);
           const vetor = tipo.func(n);
-          const tempo = testarOrdenacao(algoritmo.func, vetor);
-          csv += `${algoritmo.nome},${tipo.nome},${n},${tempo.toFixed(3)}\n`;
+          const {tempo, comparacoes, trocas} = testarOrdenacao(algoritmo.func, vetor);
+
+          csv += `${algoritmo.nome},${tipo.nome},${n},${tempo.toFixed(2)},${comparacoes},${trocas}\n`;
+
           // Pequena pausa para não travar o navegador
-          await new Promise(r => setTimeout(r, 10));
+          //await new Promise(r => setTimeout(r, 10));
         }
       }
     }
