@@ -121,7 +121,7 @@ function selecao(vetor) {
 </pre>
 
 
-| Algoritmo           | Melhor Caso | Caso Médio | Pior Caso | Explicação |
+| Algoritmo           | Melhor Caso | Caso Médio | Pior Caso |  |
 |--------------------|-------------|------------|-----------|------------|
 | **Bolha v1**       | O(n²)       | O(n²)      | O(n²)     | Sempre percorre os pares de elementos, fazendo comparações; no pior caso precisa trocar quase todos. |
 | **Bolha v2 (com flag)** | O(n)     | O(n²)      | O(n²)     | A flag interrompe o loop se o vetor já estiver ordenado (melhor caso), mas no pior caso percorre tudo. |
@@ -195,11 +195,32 @@ Os resultados coletados foram plotados em gráficos para facilitar a visualizaç
 
 
 
-## 💡 Conclusão
+# 💡 Conclusão
 
-• Qual o método de ordenação estudado mais eficiente? 
+## <b>• Qual o método de ordenação estudado mais eficiente?</b>
 
-• O tipo de vetor (ordenado de forma crescente, decrescente e aleatório) influencia
-na performance dos algoritmos? 
+Inserção e Bolha 2ª versão são os mais eficientes em vetores já ordenados (melhor caso), porque fazem poucas comparações e trocas, resultando em tempo O(n).
 
-• Os gráficos obtidos expressaram a notação Big O definida? Por que?
+Para vetores aleatórios, Inserção é geralmente mais rápida que Bolha e Seleção, mesmo que ainda seja O(n²), porque faz menos trocas em média.
+
+Seleção tem poucas trocas, mas muitas comparações, tornando-a lenta em termos de tempo.
+
+No geral, inserção é o mais eficiente na prática para vetores pequenos a médios, especialmente quando há algum nível de ordenação. Bolha otimizada é eficiente no melhor caso, mas igual à Bolha clássica no pior caso.
+
+## <b>• O tipo de vetor (ordenado de forma crescente, decrescente e aleatório) influencia na performance dos algoritmos? </b>
+
+Ordenado (crescente): Bolha otimizada e Inserção detectam que o vetor já está organizado, fazendo O(n) operações.
+
+Decrescente: Bolha e Inserção realizam o pior caso, com O(n²) comparações e trocas máximas, tempo elevado.
+
+Aleatório: Caso médio, complexidade ainda O(n²), mas número de trocas geralmente menor que no vetor decrescente.
+
+Seleção: quase não é afetada pelo tipo de vetor, porque sempre percorre todo o vetor para buscar o menor elemento.
+
+## <b>• Os gráficos obtidos expressaram a notação Big O definida? Por que?</b>
+
+Bolha e Seleção: crescem quadráticamente com o tamanho do vetor (O(n²)) em qualquer tipo de vetor.
+
+Bolha 2ª versão e Inserção: mostram comportamento linear (O(n)) no melhor caso (vetor ordenado) e quadrático (O(n²)) no pior caso (vetor decrescente).
+
+Motivo: o tempo, comparações e trocas observados seguem os padrões teóricos, confirmando a complexidade analítica dos algoritmos.
